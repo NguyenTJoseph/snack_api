@@ -20,7 +20,7 @@ class SnackModelTests(TestCase):
         )
         test_Snack.save()
 
-    def test_blog_content(self):
+    def test_content(self):
         snack = Snack.objects.get(id=1)
 
         self.assertEqual(str(snack.author), 'test')
@@ -35,8 +35,8 @@ class APITEST(APITestCase):
 
         url = reverse('snack_list')
         data = {
-            "name":"Testing is Fun!!!",
-            "description":"when the right tools are available",
+            "name":"This is a snack",
+            "description":"Tiny food",
             "author":test_user.id,
         }
 
