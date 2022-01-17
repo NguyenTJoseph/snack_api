@@ -28,10 +28,20 @@ class SnackModelTests(TestCase):
         self.assertEqual(snack.description, 'Some random text')
         
 class APITEST(APITestCase):
-        
-    def test_create(self):
+    @classmethod
+    def setUpTestData(cls):
         test_user = get_user_model().objects.create_user(username='test',password='pass')
         test_user.save()
+
+        test_Snack = Snack.objects.create(
+            author = test_user,
+            name = 'A name',
+            description = 'Some random text'
+        )
+        test_Snack.save()
+
+    def test_create(self):
+        test_user = get_user_model().objects.get(username='test')
 
         url = reverse('snack_list')
         data = {
